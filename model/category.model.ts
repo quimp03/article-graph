@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
-const articleSchema = new mongoose.Schema(
+const categorySchema = new mongoose.Schema(
   {
     title: String,
     avatar: String,
-    description: String,
-    categoryId: String,
     deleted: {
       type: Boolean,
       default: false,
@@ -15,5 +13,5 @@ const articleSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const Article = mongoose.model("Article", articleSchema, "articles");
-export default Article;
+const Category = mongoose.model("Category", categorySchema, "categories");
+export default Category
