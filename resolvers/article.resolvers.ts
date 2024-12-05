@@ -2,10 +2,35 @@ import Article from "../model/article.model"
 import Category from "../model/category.model"
 export const resolversAriticle = { //like function controller
     Query : {
-        getListArticle: async () => {
-            const articles = await Article.find({
+        getListArticle: async (_, agrs) => {
+            const {
+                sortKey,
+                sortValue,
+                currentPage,
+                limitItems,
+                filterKey,
+                filterValue
+            } = agrs
+            const find = {
                 deleted: false
-            })
+            }
+            //sort
+            const sort = {
+            }
+            if(sortKey && sortValue)
+            {
+               sort[sortKey] = sortValue
+            }
+            //end sort
+            //pagination
+            const skip = (currentPage - 1) * limitItems
+            //end pagination
+
+            //filter
+            if(filterKey && filterValue){
+                find[filterKey] = filterValue
+            }
+            const articles = await Article.find(find).sort(sort).skip(skip)
             return articles
         },
         getArticle: async(_,args) => {
