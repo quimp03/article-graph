@@ -9,7 +9,8 @@ export const resolversAriticle = { //like function controller
                 currentPage,
                 limitItems,
                 filterKey,
-                filterValue
+                filterValue,
+                keyword
             } = agrs
             const find = {
                 deleted: false
@@ -29,6 +30,12 @@ export const resolversAriticle = { //like function controller
             //filter
             if(filterKey && filterValue){
                 find[filterKey] = filterValue
+            }
+            //end filter
+            //find by keyword
+            if(keyword){
+                const keywordRegex = new RegExp(keyword, "i")
+                find["title"] = keywordRegex
             }
             const articles = await Article.find(find).sort(sort).skip(skip)
             return articles

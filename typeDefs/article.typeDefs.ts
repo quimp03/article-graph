@@ -13,7 +13,8 @@ export const typeDefsArticle = gql`
         getListArticle(
         sortKey: String, sortValue: String,
         currentPage: Int = 1, limitItems: Int = 2,
-        filterKey: String, filterValue: String
+        filterKey: String, filterValue: String,
+        keyword: String
         ): [Article]
         getArticle(id: String): Article
     }
